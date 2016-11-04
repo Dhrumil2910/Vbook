@@ -1,0 +1,102 @@
+ {% extends 'vbook/base.html' %} {% load staticfiles %} {% block body %}
+<link href="{% static 'vbook/css/katex.min.css' %}" rel="stylesheet" type="text/css">
+<div class="ui container" id="own-cards" style="width:95%;display: flex;">
+    <div class="ui grid" style="width:100%">
+        <div class="eight wide column" style="flex: 1;background-color: #fffbff;">
+            <!-- <div class="ui icon fluid input">
+                <input type="text" placeholder="Search..." id="video-url">
+                <i class="search link icon own-search-icon"></i>
+            </div> -->
+            <div class="ui fluid video" style="margin-top: 0.6em;">
+                <iframe id="video-player" src="https://www.youtube.com/embed/O8i__zLgOWg?feature=oembed" height="490" width="633" frameBorder="0" allowfullscreen>
+                </iframe>
+                <!-- <video width="633" height="490" controls>
+                    <source src="https://www.youtube.com/watch?v=F3gBZK4QrWY">
+                </video> -->
+            </div>
+            <a href="https://www.youtube.com/watch?v=O8i__zLgOWg&amp;vbook_id={{notes.0.url.id}}" target="_blank">
+                <button class="ui right labeled icon youtube button">
+                    <i class="right arrow icon"></i> Open in YouTube
+                </button>
+            </a>
+        </div>
+        <div class="eight wide column" style="height:90vh;background-color: #fafafa; overflow-y:scroll ">
+            <div id="editor" class="editor" style="border:none; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)">
+            </div>
+            <div class="ui doubling two stackable cards fluid own-stackable-cards" id="notes-div"> {% csrf_token %} {% for note in notes %}
+                <div class="ui link red card own-card" style="height: 22em; border:none; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)" id="note-{{ note.id }}">
+                    <div class="content">
+                        <span class="right floated play link meta own-play-time" id="play-{{ note.id }}">
+                    <i class="play icon"></i>
+                        {{ note.time }}
+                </span>
+                        <div class="header" style="color: #666666">{{ note.title }}</div>
+                    </div>
+                    <div class="content">
+                        <div class="description own-description">
+                            <p>{{ note.content | safe }}</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="ui left floated">
+                            <a class="ui teal tag mini label">Featured</a>
+                            <a class="ui teal tag mini label">Featured</a>
+                        </div>
+                        <!-- <div class="ui left floated">
+                    <div class="item" style="font-size:0.8em"><i class="history grey icon"></i>{{ note.last_edited}}</div>
+                </div> -->
+                        <div class="ui left pointing right floated dropdown">
+                            <i class="ellipsis vertical icon"></i>
+                            <div class="left menu">
+                                <div class="item"><i class="share alternate white icon"></i>Share</div>
+                                <div class="item"><i class="edit white icon"></i>Edit</div>
+                                <a class="item">
+                                    <text data-tooltip="Red"><i class="red stop icon own-color-note" id="color-{{note.id}}-red"></i></text>
+                                    <text data-tooltip="Yellow"><i class="yellow stop icon own-color-note" id="color-{{note.id}}-yellow"></i></text>
+                                    <text data-tooltip="Green"><i class="green stop icon own-color-note" id="color-{{note.id}}-green"></i></text>
+                                    <text data-tooltip="Blue"><i class="blue stop icon own-color-note" id="color-{{note.id}}-blue"></i></text>
+                                </a>
+                                <div class="item own-delete-icon" id="delete-{{ note.id }}"><i class="red trash icon"></i>Delete</div>
+                            </div>
+                        </div>
+                        <span class="ui right floated own-card-resize-full" id="note-{{note.id}}">
+                    <i class="expand icon"></i>
+                </span>
+                        <span class="right floated star own-fav-star"> 
+                    <i class="star {% if note.is_favorite %} orange {% endif %} icon own-fav-icon" id="fav-{{ note.id }}" style="color:gray"></i>
+                </span>
+                    </div>
+                </div>
+                <!-- Note Expand Modal -->
+                <div class="ui long test modal own-expand-modal" id="expand-modal-{{ note.id }}" style="max-height: 35em;">
+                    <div class="header" style="background: #efefef">{{ note.title }}
+                        <span class="right floated play link meta" style="float: right;color: gray">
+                    <i class="play icon"></i>
+                        {{ note.last_edited }}
+                </span>
+                    </div>
+                    <div class="content" style="overflow-y: auto; max-height: 30em;">
+                        <p>{{ note.content | safe}}</p>
+                    </div>
+                    <div class="actions">
+                        <div class="ui left teal tag label" style="float:left">User</div>
+                        <div class="ui edit button own-edit-button-modal" id="edit-modal-button-{{ note.id }}">Edit</div>
+                        <div class="ui cancel red button">Cancel</div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Modal for Editing a note -->
+                <div class="ui long modal own-edit-modal" style="padding:0em;">
+                    <div id="editor-modal" class="editor-modal" style="height:20em">
+                    </div>
+                    <div class="actions">
+                        <div class="ui left teal tag label" style="float:left">User</div>
+                        <div class="ui green approve button">Save</div>
+                        <div class="ui cancel red button">Cancel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

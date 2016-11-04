@@ -1,0 +1,27 @@
+{% extends 'vbook/base_min.html' %}
+{% block title %}Login{% endblock %}
+{% block body %}
+
+<div class="ui middle aligned center aligned grid">
+	<div class="column">
+		<h2 class="ui image header">
+			<div class="content">
+				Log-in to your account
+			</div>
+		</h2>
+		<form action="" method="post" class="ui large form">
+			{% csrf_token %}
+			<div class="ui stacked secondary  segment">
+				{% include 'vbook/form-template.html' %}
+				<button class="ui fluid large teal submit button" type="Submit">Login</button>
+			</div>
+			<div class="ui error message">{{field.errors}}</div>
+
+		</form>
+
+		<div class="ui message">
+			New to us? <a href="/vbook/register">Register</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

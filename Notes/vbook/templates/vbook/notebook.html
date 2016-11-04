@@ -1,0 +1,84 @@
+{% extends 'vbook/base_2.html' %} {% block title %}Notebooks{% endblock %} {% block body %} {% load staticfiles %} {% static "" as staticUrl %} {% block bootstrap %}
+<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"> {% endblock %}
+<div class="ui container own-container-notebook">
+    {% csrf_token %}
+    <div class="ui grid">
+        <div class="four wide column">
+            <h2 style="font-weight:bold;font-family: 'Montserrat', sans-serif; "> Your Notebooks </h2>
+        </div>
+        <div class="four wide column">
+        </div>
+        <div class="four wide column"></div>
+        <div class="four wide column">
+
+            <div class="ui right floated button" style="float:right; background: white; width: 2em" data-tooltip="Show Shared Notebooks" data-position="bottom right"><i class="share alternate white big icon"></i></div>
+            <div class="ui right floated button" style="float:right; background: white; width: 2em" data-tooltip="Show Favorites Notebooks" data-position="bottom right">
+                <i class="star big icon"></i>
+            </div>
+            <div class="ui right floated floating big dropdown labeled icon button">
+                <i class="filter icon"></i>
+                <span class="text">Sort by</span>
+                <div class="menu">
+                    <div class="header">Sort by</div>
+                    <div class="active item" data-text="Today">Today</div>
+                    <div class="item" data-text="This week">This Week</div>
+                    <div class="item" data-text="This month">This Month</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr style="height: 10px; border: 0; box-shadow: 0 4px 4px -4px #8c8b8b inset;">
+    <div class="ui doubling five cards fluid own-stackable-cards notebook-cards">
+        {% for notebook in notebook_list %}
+        <div class="ui link {{ notebook.color }} card own-card notebook-card" id="notebook-{{notebook.id}}" style="border:none; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)">
+            <div class="image">
+                <img src="{{ staticUrl }}vbook/images/alphabets/{{ notebook.title|make_list|first|lower }}.png">
+            </div>
+            <div class="content">
+                <span class="right floated play link">
+                    <i class="star {% if notebook.is_favorite %} orange {% endif %} icon own-fav-icon" id="fav-{{notebook.id}}"></i>
+                </span>
+                <div class="ui small modal" id="notebook-{{notebook.id}}-modal">
+                    <div class="header">{{ notebook.title }}</div>
+                    <div class="content">
+                        {{ notebook.description }}
+                    </div>
+                </div>
+                <div class="twelve wide own-header" style="font-size: 0.9;font-weight:bold;font-family: 'Montserrat', sans-serif;color:black"><a href="/vbook/{{ notebook.id }}/" style="color:black"> {{ notebook.title }}</a></div>
+            </div>
+            <div class="extra content">
+                <div class="ui left floated">
+                    <div class="item" style="font-size:0.8em"><i class="history grey icon"></i>{{ notebook.last_edited}}</div>
+                </div>
+                <div class="ui left pointing right floated dropdown two wide">
+                    <i class="ellipsis vertical icon"></i>
+                    <div class="left menu">
+                        {% if not notebook.public %}
+                        <div class="item own-share-icon" id="share-{{notebook.id}}"><i class="share alternate white icon"></i>Share</div>
+                        {% else %}
+                        <div class="item own-share-icon" id="share-{{notebook.id}}"><i class="share alternate white icon"></i>Un-Share</div>
+                        {% endif %}
+                        <div class="item notebook-card-expand" id="notebook-{{notebook.id}}"><i class="edit white icon"></i>Edit</div>
+                        <div class="item">
+                            <i class="paint brush icon"></i> Color
+                        </div>
+                        <a class="item">
+                            <text data-tooltip="Red"><i class="red stop icon own-color" id="color-{{notebook.id}}-red"></i></text>
+                            <text data-tooltip="Yellow"><i class="yellow stop icon own-color" id="color-{{notebook.id}}-yellow"></i></text>
+                            <text data-tooltip="Green"><i class="green stop icon own-color" id="color-{{notebook.id}}-green"></i></text>
+                            <text data-tooltip="Blue"><i class="blue stop icon own-color" id="color-{{notebook.id}}-blue"></i></text>
+                        </a>
+                        <div class="item delete-notebook" id="delete-{{notebook.id}}"><i class="red trash icon"></i>Delete</div>
+                    </div>
+                </div>
+                <!--                  <span class="ui right floated notebook-card-expand" id="notebook-{{notebook.id}}">
+                    <i class="expand icon"></i>
+                </span>  -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} {% block bootstrap_js %}
+<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+{% endblock %}

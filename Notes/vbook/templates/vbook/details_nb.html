@@ -1,0 +1,106 @@
+{% extends 'vbook/base.html' %} {% load staticfiles %}
+    {% block bootstrap %}
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    {% endblock %}
+{% block body %} 
+{% static "" as staticUrl %}
+<div class="ui fluid container" style="display: flex; ">
+    <div class="col-sm-12" style="margin-top: 0em; flex:1;background-color: #fffbff;">{% csrf_token %}
+        <div class="ui grid">
+            <div class="four wide column">
+                <h3 style="font-weight:bold;font-family: 'Montserrat', sans-serif;">Chapters</h3>
+            </div>
+            <div class="four wide column">
+                <div class="ui right labeled left icon small input" style="width:30em">
+                    <i class="tags icon"></i>
+                    <input type="text" placeholder="Enter Chapter" id="own-add-chapter-text">
+                    <a class="ui tag label" id="own-chapter-label">
+                        Add Chapter
+                    </a>
+                </div>
+            </div>
+            <div class="four wide column"></div>
+            <div class="four wide column">
+                <div class="ui right floated button" style="float:right; background: white">
+                    <i class="star big icon"></i>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="col-xs-3" style="height:90vh;overflow-y:scroll;background-color:white;margin-bottom: 3em">
+            <!-- required for floating -->
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-left sideways" id="own-tabs" style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);border-top: 1px solid #ddd">
+                {% for tag ,videos in jsonObTV.iteritems %}
+                <li class="{% if forloop.counter == 1 %} active {% endif %} own-chapter-link" style="font-weight:bold;font-family: 'Montserrat', sans-serif;" id="tab-{{ tag.id }}-{{ tag.title | cut:' ' }}">
+                    <a href="#{{ tag.title | cut:' ' }}" style="border-bottom:1px solid #ddd;" data-toggle="tab">{{ tag.title }} 
+                       <button class="ui right floated tiny button">
+                            {{ videos | length }}
+                        </button>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-xs-9  own-st-cards" id="own-st-cards" style="height:90vh;background-color: #f2f2f2; overflow-y:scroll; padding-top: 1em">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                {% for tag, videos in jsonObTV.iteritems %}
+                <div class="tab-pane {% if forloop.counter == 1 %} active {% endif %}" id="{{ tag.title | cut:' '}}">
+                    <div class="ui link four stackable cards">
+                        {% for video in videos %} {% if video.No_of_notes != 'No video' %}
+                        <div class="ui small card own-video-card" style="border:none; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)">
+                            <div class="ui slide masked reveal image">
+                                <a href="{{ url_path }}/{{ video.urlname.id }}/"><img src="{{ staticUrl }}vbook/images/alphabets/{{ video.urlname.title|make_list|first|lower }}.png"></a>
+                            </div>
+                            <div class="content">
+                                <div class="header" style="font-size: 1em;font-family: 'Montserrat', sans-serif;max-height: 5em;overflow-y:scroll ">{{ video.urlname.title }}</div>
+                                <div class="meta">
+                                    <span class="date" style="font-size: 0.9em;">Created in Sep 2014</span>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <span style="font-size: 0.9em;">
+                                    <i class="sticky note icon"></i>{{ video.No_of_notes }} Notes
+                                </span>
+                                <div class="ui left pointing right floated dropdown">
+                                    <i class="ellipsis vertical icon"></i>
+                                    <div class="left menu">
+                                        <div class="item"><i class="external share white icon"></i>Export to</div>
+                                        <div class="item own-delete-icon" id="delete-{{ video.urlname.id }}"><i class="red trash icon"></i>Delete</div>
+                                    </div>
+                                </div>
+                                <span class="right floated star link meta">
+                                    <i class="star icon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        {% endif %} {% endfor %}
+                    </div>
+                    <!--  <a href="#" id="loadMore" style="margin-top: 5em">Load More</a> -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="ui blue huge segment"  id="own-video-add" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 15px 0 rgba(0, 0, 0, 0.19)">
+        <div class="ui right labeled left icon large input" style="width:30em">
+            <i class="tags icon"></i>
+            <input type="text" placeholder="Enter URL" id="own-add-video-text">
+            <a class="ui tag label" id="own-video-label">
+                Add video
+            </a>
+        </div>
+    </div>
+    
+    <div class="circular ui icon blue button" id="fixedButton" data-tooltip="Add video">
+        <i class="plus huge white icon"></i>
+    </div>
+    <!--  <button type="button" class="btn btn-danger btn-circle btn-xl" id="fixedButton"><i class="glyphicon glyphicon-add"></i></button> -->
+</div>
+{% endblock %}
+    {% block bootstrap_js %}
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+

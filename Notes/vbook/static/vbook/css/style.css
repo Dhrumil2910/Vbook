@@ -1,0 +1,180 @@
+body {
+    overflow-y: auto
+}
+
+.ui.container {
+    margin-top: 2.2em;
+}
+
+
+.main_sidebar{
+  width: 20em;
+}
+.own-container-notebook{
+  margin-top: 4em;
+}
+
+.ui.grid {
+    margin-top: 2em;
+}
+
+.own-class-sidebar {
+    color: black;
+}
+
+.own-class-home {
+    color: #660000;
+}
+
+.own-class-block {
+    color: #660000;
+}
+
+.own-class-smile {
+    color: #660000;
+}
+
+.own-class-search {
+    color: #660000;
+}
+
+.editor {
+    height: 12em;
+    background: white;
+    box-shadow: 0.4px 0.3px 1px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2em;
+    resize: vertical;
+    overflow: auto;
+}
+
+.own-edit-modal {
+    padding: 2em;
+}
+
+.editor-modal {
+    height: 20em;
+    box-shadow: 0.4px 0.3px 1px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 4em;
+    resize: vertical;
+    overflow: auto;
+}
+
+.ql-toolbar {
+    margin-bottom: 0.2em;
+    background: white;
+    border:none; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.own-checkmark {
+    float: right;
+}
+
+
+.own-expand-modal{
+    width: 10em;
+}
+
+
+
+.own-card-fav {}
+
+.own-description {
+    overflow-y: auto;
+    height: 12em;
+    flex: 1;
+    /* Shrink and grow according to available height */
+    flex-basis: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.own-video-link{
+    box-shadow: 0.2px 0.1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.tabs-left, .tabs-right {
+  border-bottom: none;
+  padding-top: 2px;
+}
+.tabs-left {
+  border-right: 1px solid #ddd;
+}
+.tabs-right {
+  border-left: 1px solid #ddd;
+}
+.tabs-left>li, .tabs-right>li {
+  float: none;
+  margin-bottom: 0px;
+ 
+}
+.tabs-left>li {
+  margin-right: -1px;
+ 
+}
+.tabs-right>li {
+  margin-left: -1px;
+}
+.tabs-left>li.active>a,
+.tabs-left>li.active>a:hover,
+.tabs-left>li.active>a:focus {
+  border-bottom-color: #ddd;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  
+  
+  border-left: 6px solid #15317E ;
+  background-color: #f2f2f2;
+}
+
+.tabs-right>li.active>a,
+.tabs-right>li.active>a:hover,
+.tabs-right>li.active>a:focus {
+  border-bottom: 1px solid #ddd;
+  border-left-color: transparent;
+
+
+}
+.tabs-left>li>a {
+  border-radius: 2px 0 0 2px;
+  margin-right: 0;
+  display:block;
+
+
+}
+
+#loadMore:hover {
+    background-color: #fff;
+    color: #33739E;
+}
+
+#loadMore {
+    padding: 10px;
+    text-align: center;
+    background-color: #33739E;
+    color: #fff;
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    border-color: #fff;
+    box-shadow: 0 1px 1px #ccc;
+    transition: all 600ms ease-in-out;
+    -webkit-transition: all 600ms ease-in-out;
+    -moz-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;
+}
+
+#fixedButton {
+    position: fixed;
+    bottom: 2em;
+    right: 4em; 
+}
+
+#own-video-add {
+    position: fixed;
+    bottom: 0.1em;
+    right: 7em; 
+    display: none;
+}
+

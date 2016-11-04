@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Django{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css">
+    <link href="{% static 'vbook/css/quill.snow.css' %}" rel="stylesheet" type="text/css"> {% block bootstrap %} {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="{% static 'vbook/css/style.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+     <div class="ui sidebar labeled left vertical icon menu main_sidebar" style="background: White;">
+        <a href="/vbook/" class="huge item" style="color:#660000;;font-family: 'Montserrat', sans-serif;">
+            <i class="home huge icon own-class-home"></i> Home
+        </a>
+        <a href="#" class="item" style="color:#660000;;font-family: 'Montserrat', sans-serif;">
+            <i class="block layout icon own-class-block"></i> Recent Videos
+        </a>
+        <a href="#" class="item" style="color:#660000;;font-family: 'Montserrat', sans-serif;">
+            <i class="smile icon own-class-smile"></i> Favorites
+        </a>
+        <a href="#" class="huge item" style="color:#660000;;font-family: 'Montserrat', sans-serif;">
+            <i class="search icon own-class-search"></i> Search
+        </a>
+    </div>
+    <!-- <div class="ui small top fixed menu" style="background: #660000">
+        <a id="main_menu_toggle" class="item">
+            <i class="sidebar icon own-class-sidebar"></i>
+        </a>
+        <div class="item">
+            <h4 class="header" style="color: white">
+				<b>V-BOOK</b>
+			</h4>
+        </div>
+        <div class="right menu">
+            <div class="item">
+                <input type="text" class="form-control" id="tokenfield" placeholder="Search" />
+            </div>
+        </div>
+    </div> -->
+    <div class="ui menu huge top fixed">
+        <a id="main_menu_toggle" class="item">
+            <i class="sidebar icon own-class-sidebar" style="color: Black"></i>
+        </a>
+        <div class="item">
+            <h4 class="header" style="color: Black">
+				<b>V-BOOK</b>
+			</h4>
+        </div>
+        <!-- <div class="ui category search item"> -->
+        <!-- 			<div class="ui transparent icon input">
+				<select id="tokenize" multiple="multiple" type="text" class="prompt tokenize-sample" value="Search">
+				</select>
+			</div>
+			<div class="results"></div>
+		</div>  -->
+        <div class="right menu">
+            <div class="ui right aligned category search item">
+                <div class="ui transparent icon input">
+                    <input class="prompt" type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+        </div>
+        <a id="notebook-add" class="item">
+            <h5 class="header">Add Notebook<i class="green add circle icon"></i></h5>
+        </a>
+        <a class="ui item button" href="logout/?next=success/">
+            <h5 class="header">Logout</h5>
+        </a>
+    </div>
+    <div class="ui small modal" id="notebook-add-modal" style="margin-top: -92.5px;">
+        <div class="header">
+            Add New Notebook
+        </div>
+        <div class="content">
+            <div class="ui left icon fluid input">
+                <input type="text" id="notebook-add-title" placeholder="Name">
+                <i class="add circle icon"></i>
+            </div>
+            <!-- 			<div class="ui left fluid input">
+				<input type="text" id="notebook-add-description" placeholder="Description">
+			</div> -->
+            <div class="ui warning message" id="notebook-add-error" style="display:none">
+                <div class="header">
+                    Notebook with this name already exists!
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui button" id="notebook-add-cancel">
+                Cancel
+            </div>
+            <div class="ui right positive labeled icon button" id="notebook-add-submit">
+                Add
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% block body %} {% endblock %}
+    <script type="text/javascript" src="{% static 'vbook/js/jquery-3.1.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vbook/js/jquery-ui.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
+    {% block bootstrap_js %} {% endblock %}
+    <!-- <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="{% static 'vbook/js/katex.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vbook/js/quill.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vbook/js/require.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vbook/js/semantic.min.js' %}"></script>
+    <script type="text/javascript" src="https://www.youtube.com/iframe_api"></script>
+    <script type="text/javascript" src="{% static 'vbook/js/main.js' %}"></script>
+</body>
+
+</html>

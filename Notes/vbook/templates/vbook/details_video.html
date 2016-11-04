@@ -1,0 +1,37 @@
+{% extends 'vbook/base.html' %} {% block body %} {% load staticfiles %}
+<div class="ui container">
+    <div class="ui doubling four cards fluid own-stackable-cards">
+        {% for url in urls %}
+        <div class="ui raised link red card own-card">
+            <a class="image" href="#">
+            <!--     <iframe src="http://download.blender.org/peach/trailer/trailer_1080p.ogg" width="266em" height="155em"
+frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+            </a>
+            <div class="content">
+                <div class="ui left pointing right floated dropdown">
+                    <i class="ellipsis vertical icon"></i>
+                    <div class="left menu">
+                        <a class="item"><i class="edit icon"></i>Edit</a>
+                        <a class="item"><i class="trash icon"></i>Delete</a>
+                        <a class="item"><i class="paint brush icon"></i>Color Note</a>
+                    </div>
+                </div>
+                <span class="ui right floated own-card-resize-full">
+					<i class="expand icon"></i>
+                </span>
+                <span class="right floated play link">
+                    <i class="play icon"></i>
+                </span>
+                <div class="header" style="font-size: 1.1em">{{ url.title }}</div>
+            </div>
+            <!--  <div class="extra content">
+                <div class="ui left floated">
+                    <a class="ui light gray tag mini label">Featured</a>
+                    <a class="ui teal tag mini label">Featured</a>
+                </div>
+            </div> -->
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
